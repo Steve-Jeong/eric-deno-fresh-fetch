@@ -7,7 +7,7 @@ import { Layout } from "../components/layouts/Layout.tsx";
 export default function Home() {
   return (
     <Layout
-      title="Welcome"
+      title="Eric Fetch"
       description="Welcome"
       canonical="/"
       hasFooter={true}

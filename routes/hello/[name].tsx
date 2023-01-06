@@ -2,8 +2,17 @@
 import { h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { Layout } from "../../components/layouts/Layout.tsx";
+import Input from "../../islands/Input.tsx";
+
+
 
 export default function Hello(props: PageProps) {
+  let gname = 'abc'
+  function handleSubmit(name:string):null {
+    gname = name;
+    console.log('in caller fn the name is : ', name);
+  }
+
   return (
     <Layout
       title={`Hello ${props.params.name}`}
@@ -12,7 +21,8 @@ export default function Hello(props: PageProps) {
       hasFooter={true}
       hasHeader={true}
     >
-      <div>Hello {props.params.name}</div>
+      <Input onSubmit={handleSubmit} />
+      <div>Hello {gname}</div>
     </Layout>
   );
 }
