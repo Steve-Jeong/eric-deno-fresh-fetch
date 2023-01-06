@@ -23,6 +23,7 @@ export default function Input(props) {
 
   return (
     <Layout
+      // title={`Hello ${props.params.name}`}   // name때문에 오류가 난다. island로 넘어오면서 name이 초기화 되는 것 같다.
       title={`Hello `}
       description={`Hello `}
       canonical={`/hello/`}
