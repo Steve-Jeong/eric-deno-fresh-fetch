@@ -6,7 +6,7 @@ import Input from "../../islands/Input.tsx";
 import {useState} from 'preact/hooks'
 
 export default function Hello(props: PageProps) {
-  console.log('props in Hello : ', props)
+  console.log('props in Hello : ',  props)
 
   return (
     <div>
