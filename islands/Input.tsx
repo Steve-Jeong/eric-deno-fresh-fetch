@@ -5,13 +5,26 @@ import { useEffect, useState } from "preact/hooks";
 import { Layout } from "../components/layouts/Layout.tsx";
 
 // type InputPropsType = {
-//   onSubmit: (name: string) => null;
+//   onSubmit: (name: string) => void;
 // };
 
 export default function Input(props) {
   const [gname, setGname] = useState("");
+  const [fname, setFname] = useState('')
+  const [user, setUser] = useState({});
 
-  console.log('props in Input :', props);
+  useEffect(()  => {
+    async function fetchData() {
+      const res = await fetch(`https://api.github.com/users/${fname}`);
+      if(res.status === 404){
+        setUser({})
+      } else {
+        const data = await res.json();
+        setUser(data)
+      }
+    }
+    fetchData()
+  }, [fname]);
 
   const onInput = (e) => {
     setGname(e.target.value);
@@ -19,12 +32,15 @@ export default function Input(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('name in Input : ', gname);
+    setFname(gname)
+
   };
 
   return (
     <Layout
       // title={`Hello ${props.params.name}`}   // name때문에 오류가 난다. island로 넘어오면서 name이 초기화 되는 것 같다.
-      title={`Hello `}
+      title={`Hello ${props.name}`}
       description={`Hello `}
       canonical={`/hello/`}
       hasFooter={true}
@@ -46,8 +62,19 @@ export default function Input(props) {
           Submit
         </button>
       </form> 
-  
-      <div>Hello {gname}</div>
+
+      <div>gname : {gname} </div>
+      <div>fname : {fname} </div>
+      {fname != '' ? 
+        (
+        <section class={tw`mt-10`}>
+          <a href={user.html_url} target="_blank">
+            <p class={tw`text-2xl text-center`}>Username: {user.login}</p>
+            <img class={tw`m-auto border rounded shadow-md w-32 h-32`} src={user.avatar_url} alt={user.login} />
+          </a>
+        </section>
+        ) : 
+        ''}
     </Layout>
   );
 }
