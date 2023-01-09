@@ -34,6 +34,7 @@ export default function Input(props) {
     e.preventDefault();
     console.log('name in Input : ', gname);
     setFname(gname)
+    props.onClick(fname);
 
   };
 

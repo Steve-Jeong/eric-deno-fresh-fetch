@@ -8,9 +8,13 @@ import {useState} from 'preact/hooks'
 export default function Hello(props: PageProps) {
   console.log('props in Hello : ',  props)
 
+  function handleClick(some : string) {
+    console.log('something from handleClick callback function : ', some)
+  }
+
   return (
     <div>
-      <Input />
+      <Input name='Steve Sangtae Jeong' onClick={handleClick}/>
     </div>
   );
 }
